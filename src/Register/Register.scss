@@ -1,0 +1,26 @@
+.Register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+
+  h2 {
+    color: #5D2A42;
+  }
+
+  img {
+    width: 300px;
+  }
+
+  .register-button {
+    background-color: #5D2A42;
+    border-color: #5D2A42;
+    color: white;
+  }
+}
+
+.registerImage {
+  display: flex;
+  justify-content: flex-end;
+}
+

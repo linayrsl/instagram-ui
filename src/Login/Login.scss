@@ -1,0 +1,26 @@
+.Login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+
+  h2 {
+    color: #5D2A42;
+  }
+
+  img {
+    width: 300px;
+    background-color: transparent;
+  }
+
+  .login-button {
+    background-color: #5D2A42;
+    border-color: #5D2A42;
+    color: white;
+  }
+
+  .loginImage {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
