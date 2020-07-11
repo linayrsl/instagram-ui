@@ -1,0 +1,38 @@
+ .login-button {
+    background-color: #5D2A42;
+    border-color: #5D2A42;
+    color: white;
+  }
+
+.createPost {
+  //display: flex;
+  //flex-direction: column;
+
+  h2 {
+    color: #5D2A42;
+  }
+
+  img {
+     width: 300px;
+     background-color: transparent;
+   }
+
+  .createPostImage {
+    //display: flex;
+    //flex-direction: column;
+    ////align-items: center;
+  }
+
+  .creatPostDescription {
+    //display: flex;
+    //flex-direction: row;
+  }
+
+  .submitPostButton {
+    background-color: #5D2A42;
+    border-color: #5D2A42;
+    color: white;
+  }
+}
+
+

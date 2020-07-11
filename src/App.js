@@ -1,56 +1,74 @@
-import React, {useEffect, useState} from 'react';
-import './App.scss';
-import Header from "./Header/Header";
+import React, { useEffect, useState } from "react";
+import "./App.scss";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route
+  Switch,
+  Route,
+  useHistory,
 } from "react-router-dom";
+import Menu from "./Menu/Menu";
 import Register from "./Register/Register";
 import Login from "./Login/Login";
 import PostCreate from "./PostCreate/PostCreate";
-import {UserContext} from "./context/userContext";
+import { UserContext } from "./context/userContext";
 import Logout from "./Logout/Logout";
-import config from "./config/index";
-import {UserService} from "./services/user-service";
+import { UserService } from "./services/user-service";
+import AppLoader from "./AppLoader/AppLoader";
+import Feed from "./Feed/Feed";
 
 function App() {
-    const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
 
-    useEffect(() => {
-        async function getUser() {
-            const user = await UserService.get()
-            setUser(user);
+  useEffect(() => {
+    window.document.body.classList.add("init-app-loader-animate-hide");
+    // Hiding initial app loader after 1 sec because the "fading" animation takes 1 sec to work
+    setTimeout(() => window.document.body.classList.add("init-app-loader-hidden"), 1000);
+
+    async function getUser() {
+      try {
+        const foundUser = await UserService.get();
+        setUser(foundUser);
+        if (!foundUser) {
+          history.push("/login");
         }
-        getUser();
-    }, []);
+      } catch (error) {
+        console.error(error);
+        history.push("/login");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    getUser();
+  }, [history]);
 
-    return (
-        <UserContext.Provider value={user}>
-            <Router className="App">
-                <Header/>
-                <div className={"container-fluid"}>
-                    <Switch>
-                        <Route path={"/register"}>
-                            <Register/>
-                        </Route>
-                        <Route path={"/login"}>
-                            <Login onUserLogIn={(user) => {setUser(user)}}/>
-                        </Route>
-                        <Route path={"/logout"}>
-                            <Logout onUserLogOut={() => {setUser(null)}}/>
-                        </Route>
-                        <Route path={"/post/create"}>
-                            <PostCreate/>
-                        </Route>
-                        <Route path={"/"}>
-                            Home page
-                        </Route>
-                    </Switch>
-                </div>
-            </Router>
-        </UserContext.Provider>
-    );
+  return (
+    <UserContext.Provider value={{ user }}>
+      {isLoading && <AppLoader />}
+      <div className="app d-flex flex-column">
+        <Menu />
+        <div className="appBody container-fluid">
+          <Switch>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/login">
+              <Login onUserLogIn={(currentUser) => { setUser(currentUser); }} />
+            </Route>
+            <Route path="/logout">
+              <Logout onUserLogOut={() => { setUser(null); }} />
+            </Route>
+            <Route path="/post/create">
+              <PostCreate />
+            </Route>
+            <Route path="/">
+              <Feed />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </UserContext.Provider>
+  );
 }
 
 export default App;

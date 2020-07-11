@@ -1,0 +1,86 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+.post {
+  width: 31%;
+  min-width: 339px;
+  margin: 1%;
+  box-sizing: border-box;
+  border-radius: 20px;
+
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+  @include media-breakpoint-down(lg) {
+    width: 48%;
+  }
+
+    .post-avatar {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid black;
+    }
+
+  .postBody {
+
+    img {
+    width: 100%;
+    }
+  }
+
+  .postFooter {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+
+    @media (max-width: 575.98px) {
+      font-size: smaller;
+      margin-top: 5px;
+    }
+
+    .dateAndAvatarSection {
+      width: 150px;
+      align-items: baseline;
+
+      .postDate {
+        margin-left: 5px;
+      }
+    }
+
+    .userAvatar{
+      margin-left: 0!important;
+      border: 1px solid black;
+      border-radius: 50%;
+    }
+
+    .postControls {
+      display: flex;
+      justify-content: flex-end;
+      align-items: baseline;
+
+      .numOfLikes {
+        font-size: larger;
+      }
+
+      button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .numOfLikes {
+        margin-right: 5px;
+      }
+    }
+
+    .postDescription {
+      @media (max-width: 575.98px) {
+        display: block;
+      }
+    }
+  }
+}

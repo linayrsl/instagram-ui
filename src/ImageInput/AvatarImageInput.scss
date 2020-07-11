@@ -1,0 +1,40 @@
+input.imageInput {
+  display: none;
+}
+
+.imageInputContainer {
+  width: 128px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  label {
+    color: black;
+    z-index: 1;
+  }
+}
+
+.imageLocation {
+  width: 128px;
+  height: 128px;
+  background-size: 128px 128px;
+  background-position: center;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid #cccbcb;
+  position: absolute;
+  z-index: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageLocation .highImage {
+  width: 128px;
+}
+
+.imageLocation .wideImage {
+  height: 128px;
+}

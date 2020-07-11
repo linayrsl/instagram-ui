@@ -1,0 +1,119 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+.menu {
+  height: 62px;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  flex-wrap: nowrap;
+
+  .actionButtons {
+    justify-content: flex-end;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .actionButtons {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      justify-content: center;
+      left: 0;
+      height: 62px;
+      background-color: white;
+
+    }
+  }
+
+  .headerLink {
+
+    &:hover {
+      color: #5D2A42;
+    }
+  }
+}
+.colorHeader {
+  background-color: lightgray;
+}
+
+.navbar-light .navbar-brand {
+  &:hover {
+    color: #5D2A42;
+  }
+}
+
+nav.navbar {
+  .navbar-brand:hover {
+  }
+  a.navbar-brand.header-link:hover {
+    color: #5D2A42;
+  }
+
+  .navbar-nav {
+    .dropdown {
+      .dropdown-toggle {
+        &:after {
+          display: none;
+        }
+      }
+    }
+    .dropdown-menu {
+      background-color: white;
+      .dropdown-item {
+        background-color: white;
+        &:hover {
+          svg {
+            color: #5D2A42;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      flex-direction: row;
+    }
+    .headerLink {
+      @media (max-width: 575.98px) {
+        margin-right: 5px;
+      }
+      color: black;
+      &:hover {
+        color: #5D2A42;
+      }
+    }
+  }
+}
+
+.logged-ser-name-menu {
+  margin-right: 10px;
+}
+
+.login-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-link .header-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav inNavbar {
+  .header-link {
+    color: white;
+    &:hover {
+      color: #5D2A42;
+    }
+  }
+}
+
+.username {
+  @media (max-width: 575.98px) {
+    display: none;
+  }
+}
+
+
