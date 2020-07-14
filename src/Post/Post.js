@@ -6,7 +6,7 @@ import {
  faEllipsisH
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import UserAvatar from "../UserAvatar/UserAvatar";
+import Avatar from "../Avatar/Avatar";
 
 
 function Post(props) {
@@ -20,7 +20,7 @@ function Post(props) {
         <div className={"postFooter ml-1 mr-1"}>
           <div className={"d-flex justify-content-between"}>
             <div className={"dateAndAvatarSection align-items-baseline"}>
-              <UserAvatar className={"userAvatar"} defaultColor={"black"} />
+              <Avatar size={"md"} className={"userAvatar"} defaultColor={"black"} />
               <span className={"postDate"}> <Date date={props.post}/></span>
             </div>
             <div className={"postControls"}>

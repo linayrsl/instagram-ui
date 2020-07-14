@@ -14,9 +14,10 @@ import Logout from "./Logout/Logout";
 import { UserService } from "./services/user-service";
 import AppLoader from "./AppLoader/AppLoader";
 import Feed from "./Feed/Feed";
+import Profile from "./Profile/Profile";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
 
@@ -60,6 +61,9 @@ function App() {
             </Route>
             <Route path="/post/create">
               <PostCreate />
+            </Route>
+            <Route path="/profile">
+              <Profile />
             </Route>
             <Route path="/">
               <Feed />

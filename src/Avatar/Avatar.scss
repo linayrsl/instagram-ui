@@ -1,13 +1,24 @@
-.userAvatar {
+.avatar {
   @media (max-width: 575.98px) {
     margin-left: 0;
+  }
+
+  &.md{
+    width: 60px;
+    height: 60px;
+
+  }
+  &.lg {
+    width: 100px;
+    height: 100px;
   }
 
   svg, img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid white;
+    border: 2px solid white;
+    box-shadow: black;
   }
 
   svg {

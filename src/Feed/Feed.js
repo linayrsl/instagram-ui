@@ -10,7 +10,7 @@ function Feed() {
 
   useEffect( () => {
     const getPosts = async () => {
-      const result = await fetch(`${config.apiUrl}/posts`, {
+      const result = await fetch(`${config.apiUrl}/posts?sort=-1`, {
         credentials: "include",
       });
       if (result.status === 200) {
@@ -23,7 +23,7 @@ function Feed() {
   }, []);
 
   return (
-    <div className="feed container-fluid mt-sm-0 mt-4 mb-4">
+    <div className="feed container-fluid mt-sm-0 mb-sm-0 mt-4 mb-4">
       {posts.map((post, index) => <Post key={index} post={post}/>)}
     </div>
   );
