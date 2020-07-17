@@ -17,27 +17,26 @@ function Menu() {
   const { user } = useContext(UserContext);
   return (
         <nav className="menu navbar navbar-expand navbar navbar-light align-items-baseline">
-          <a className="navbar-brand headerLink" href="#">
-            <FontAwesomeIcon className={"mr-2"} icon={faInstagram} />
-            Instagram</a>
+          <h2 className="instagramLogo navbar-brand headerLink">
+            <FontAwesomeIcon aria-hidden={true} className={"mr-2"} icon={faInstagram} />
+            Instagram</h2>
             {user &&
             <ul className="actionButtons navbar-nav d-flex align-items-center">
               <li className="nav-item">
-                <Link className="nav-link headerLink" to="/">
-                  <FontAwesomeIcon className="homePageIcon" icon={faHome} />
-                  <span className="sr-only">(current)</span>
+                <Link aria-label={"Go to home page"} className="nav-link headerLink" to="/">
+                  <FontAwesomeIcon aria-hidden={true} className="homePageIcon" icon={faHome} />
                 </Link>
               </li>
               <li className="nav-item">
-                <Link  className="nav-link headerLink to" to="#">
-                  <FontAwesomeIcon icon={faSearch} />
+                <Link aria-label={"Search on this page"} className="nav-link headerLink to" to="/search">
+                  <FontAwesomeIcon aria-hidden={true} icon={faSearch} />
                 </Link>
               </li>
               <li className="nav-item">
                 {user
                 && (
-                <Link to="/post/create" className="nav-link headerLink">
-                  <FontAwesomeIcon className="createPostIcon" icon={faPlus} />
+                <Link aria-label={"Go to create post page"} to="/post/create" className="nav-link headerLink">
+                  <FontAwesomeIcon aria-hidden={true} className="createPostIcon" icon={faPlus} />
                 </Link>
                 )}
               </li>
@@ -45,7 +44,7 @@ function Menu() {
                 {user
                 && (
                 <Link to="#" className="nav-link headerLink">
-                  <FontAwesomeIcon className="likesPostIcon" icon={faHeart} />
+                  <FontAwesomeIcon aria-hidden={true} className="likesPostIcon" icon={faHeart} />
                 </Link>
                 )}
               </li>
@@ -53,18 +52,18 @@ function Menu() {
             {user &&
             <Nav navbar>
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle className="headerLink" nav caret>
-                  <MenuAvatar image={user.avatar} user={user}/>
+                <DropdownToggle role={"button"} aria-label={"Open user menu"} className="headerLink" nav caret>
+                  <MenuAvatar image={user.avatar}/>
                 </DropdownToggle>
                 <DropdownMenu right className={"dropdown-menu"}>
                   <DropdownItem>
-                    <Link to="/profile" className="dropdown-item headerLink">
-                      <FontAwesomeIcon className="mr-2 headerLink" icon={faUserAlt} />Profile
+                    <Link aria-label={"Go to profile page"} to="/profile" className="dropdown-item headerLink">
+                      <FontAwesomeIcon aria-hidden={true} className="mr-2 headerLink" icon={faUserAlt} />Profile
                     </Link>
                   </DropdownItem>
                   <DropdownItem>
-                  <Link className="dropdown-item headerLink align-items-baseline" to="/logout">
-                    <FontAwesomeIcon className="logoutIcon mr-2 headerLink" icon={faSignOutAlt} />Logout
+                  <Link aria-label={"Logout user from app"} className="dropdown-item headerLink align-items-baseline" to="/logout">
+                    <FontAwesomeIcon aria-hidden={true} className="logoutIcon mr-2 headerLink" icon={faSignOutAlt} />Logout
                   </Link>
                 </DropdownItem>
                 </DropdownMenu>

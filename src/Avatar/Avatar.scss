@@ -1,24 +1,32 @@
 .avatar {
+
   @media (max-width: 575.98px) {
     margin-left: 0;
   }
 
-  &.md{
+  &.sm {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+
+  &.md {
     width: 60px;
     height: 60px;
+    border-radius: 50%;
 
   }
   &.lg {
     width: 100px;
     height: 100px;
+    border-radius: 50%;
   }
 
   svg, img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 2px solid white;
-    box-shadow: black;
+    border: 2px solid darkgray;
   }
 
   svg {

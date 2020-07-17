@@ -5,19 +5,18 @@ import "./Avatar.scss";
 
 
 function Avatar(props) {
-  console.log(props.image);
+  console.log(props);
   const size = props.size || "sm";
   const image = props.image || null;
-  const className = size;
   return (
     <div className="avatar d-inline-block">
-      {image ? <img src={image} className={"avatar " + className}/> : <Logo style={{fill: props.defaultColor}} />}
+      {image ? <img alt={"User avatar"} src={image} className={"avatar " + size}/> : <Logo style={{fill: props.defaultColor}} />}
     </div>
   );
 }
 
 Avatar.propTypes = {
-  size: PropTypes.oneOf(["md", "lg"])
+  size: PropTypes.oneOf(["sm", "md", "lg"])
 };
 
 export default Avatar;

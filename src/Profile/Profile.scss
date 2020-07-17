@@ -1,3 +1,13 @@
 .profile {
-  display: flex;
+
+  .profileHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .userProfileDetails {
+    font-size: 20px;
+    font-weight: bolder;
+  }
+  }
 }

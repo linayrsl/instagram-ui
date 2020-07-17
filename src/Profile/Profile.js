@@ -4,6 +4,7 @@ import {UserContext} from "../context/userContext";
 import config from "../config";
 import Post from "../Post/Post";
 
+import "./Profile.scss";
 
 function Profile() {
   const { user } = useContext(UserContext);
@@ -25,10 +26,16 @@ function Profile() {
 
   return (
     <div className={"profile container-fluid"}>
-      <div className={"profile-header"}>
+      <div className={"profileHeader d-flex align-items-center"}>
         <Avatar image={user.avatar} size={"lg"}/>
+        <div className={"userProfileDetails ml-4"}>
+          {user.username}
+         <div>
+           {posts.length}
+         </div>
+        </div>
       </div>
-      <div>
+      <div className="profileBody mt-5">
         {posts.map((post) => <Post key={post._id} post={post} />)}
       </div>
     </div>

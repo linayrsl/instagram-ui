@@ -15,6 +15,7 @@ import { UserService } from "./services/user-service";
 import AppLoader from "./AppLoader/AppLoader";
 import Feed from "./Feed/Feed";
 import Profile from "./Profile/Profile";
+import Search from "./Search/Search";
 
 function App() {
   const [user, setUser] = useState({});
@@ -64,6 +65,9 @@ function App() {
             </Route>
             <Route path="/profile">
               <Profile />
+            </Route>
+            <Route path="/search">
+              <Search />
             </Route>
             <Route path="/">
               <Feed />

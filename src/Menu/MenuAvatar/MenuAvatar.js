@@ -6,8 +6,8 @@ function MenuAvatar(props) {
   const { user } = useContext(UserContext);
 
   return (
-    <div className={"menuAvatar"}>
-      <Avatar image={user.avatar} />
+    <div aria-hidden={true} className={"menuAvatar"}>
+      <Avatar size={"sm"} image={user.avatar} />
     </div>
   );
 }

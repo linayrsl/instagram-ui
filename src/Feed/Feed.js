@@ -23,7 +23,7 @@ function Feed() {
   }, []);
 
   return (
-    <div className="feed container-fluid mt-sm-0 mb-sm-0 mt-4 mb-4">
+    <div className="feed container-fluid mt-sm-0 mb-sm-0 mt-4 mb-5">
       {posts.map((post, index) => <Post key={index} post={post}/>)}
     </div>
   );
