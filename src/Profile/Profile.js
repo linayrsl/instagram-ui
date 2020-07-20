@@ -5,6 +5,7 @@ import config from "../config";
 import Post from "../Post/Post";
 
 import "./Profile.scss";
+import {Link} from "react-router-dom";
 
 function Profile() {
   const { user } = useContext(UserContext);
@@ -35,6 +36,9 @@ function Profile() {
          </div>
         </div>
       </div>
+      <Link aria-label={"Edit profile"} to={"/profile/edit"} className={"nav-link headerLink"}>
+        Edit profile
+      </Link>
       <div className="profileBody mt-5">
         {posts.map((post) => <Post key={post._id} post={post} />)}
       </div>

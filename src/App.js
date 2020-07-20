@@ -16,6 +16,7 @@ import AppLoader from "./AppLoader/AppLoader";
 import Feed from "./Feed/Feed";
 import Profile from "./Profile/Profile";
 import Search from "./Search/Search";
+import ProfileEdit from "./ProfileEdit/ProfileEdit";
 
 function App() {
   const [user, setUser] = useState({});
@@ -63,6 +64,9 @@ function App() {
             <Route path="/post/create">
               <PostCreate />
             </Route>
+            <Route path="/profile/edit">
+            <ProfileEdit />
+          </Route>
             <Route path="/profile">
               <Profile />
             </Route>
