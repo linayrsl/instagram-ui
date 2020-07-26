@@ -10,4 +10,11 @@
     font-weight: bolder;
   }
   }
+
+  .editProfileIcon {
+    color: black;
+    &:hover {
+      color: #5D2A42;
+    }
+  }
 }

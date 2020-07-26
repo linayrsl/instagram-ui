@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import config from "../config/index";
-import Post from "../Post/Post";
+import Post from "../common/Post/Post";
 import "./Feed.scss";
 
 
@@ -23,7 +23,7 @@ function Feed() {
   }, []);
 
   return (
-    <div className="feed container-fluid mt-sm-0 mb-sm-2 mt-4 mb-5">
+    <div className="feed container-fluid mt-sm-0 mb-sm-4 mt-4 mb-5">
       {posts.map((post, index) => <Post key={index} post={post}/>)}
     </div>
   );

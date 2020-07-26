@@ -57,7 +57,7 @@ function Menu() {
                 </DropdownToggle>
                 <DropdownMenu right className={"dropdown-menu"}>
                   <DropdownItem>
-                    <Link aria-label={"Go to profile page"} to="/profile" className="dropdown-item headerLink">
+                    <Link aria-label={"Go to profile page"} to={`/profile/${user._id}`} className="dropdown-item headerLink">
                       <FontAwesomeIcon aria-hidden={true} className="mr-2 headerLink" icon={faUserAlt} />Profile
                     </Link>
                   </DropdownItem>

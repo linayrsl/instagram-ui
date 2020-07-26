@@ -17,6 +17,7 @@ import Feed from "./Feed/Feed";
 import Profile from "./Profile/Profile";
 import Search from "./Search/Search";
 import ProfileEdit from "./ProfileEdit/ProfileEdit";
+import PostPage from "./PostPage/PostPage";
 
 function App() {
   const [user, setUser] = useState({});
@@ -46,7 +47,7 @@ function App() {
   }, [history]);
 
   return (
-    <UserContext.Provider value={{ user }}>
+    <UserContext.Provider value={{ user, setUser: (user) => setUser(user) }}>
       {isLoading && <AppLoader />}
       <div className="app d-flex flex-column">
         <Menu />
@@ -64,10 +65,13 @@ function App() {
             <Route path="/post/create">
               <PostCreate />
             </Route>
+            <Route path="/posts/:id">
+              <PostPage />
+            </Route>
             <Route path="/profile/edit">
             <ProfileEdit />
           </Route>
-            <Route path="/profile">
+            <Route path="/profile/:id">
               <Profile />
             </Route>
             <Route path="/search">

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {UserContext} from "../../context/userContext";
-import Avatar from "../../Avatar/Avatar";
+import Avatar from "../../common/Avatar/Avatar";
 
 function MenuAvatar(props) {
   const { user } = useContext(UserContext);

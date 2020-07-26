@@ -1,44 +1,41 @@
 import React, {useContext, useEffect, useState} from 'react';
-import Avatar from "../Avatar/Avatar";
 import {UserContext} from "../context/userContext";
 import config from "../config";
-import Post from "../Post/Post";
-
+import Post from "../common/Post/Post";
+import {
+  faUserEdit
+} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "./Profile.scss";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import ProfileUser from "./ProfileUser/ProfileUser";
 
 function Profile() {
   const { user } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
+  const { id } = useParams();
 
   useEffect( () => {
     const getPostsById = async () => {
-      const result = await fetch(`${config.apiUrl}/users/${user._id}/posts`, {
+      if (!id) {
+        return;
+      }
+      const result = await fetch(`${config.apiUrl}/users/${id}/posts`, {
         credentials: "include",
       });
       if (result.status === 200) {
         const posts = await result.json();
         setPosts(posts);
       }
-    }
+    };
     getPostsById();
-  }, [user]);
+  }, [id, user]);
 
 
   return (
     <div className={"profile container-fluid"}>
-      <div className={"profileHeader d-flex align-items-center"}>
-        <Avatar image={user.avatar} size={"lg"}/>
-        <div className={"userProfileDetails ml-4"}>
-          {user.username}
-         <div>
-           {posts.length}
-         </div>
-        </div>
-      </div>
-      <Link aria-label={"Edit profile"} to={"/profile/edit"} className={"nav-link headerLink"}>
-        Edit profile
-      </Link>
+      <ProfileUser userId={id} postsNum={posts.length}/>
+
       <div className="profileBody mt-5">
         {posts.map((post) => <Post key={post._id} post={post} />)}
       </div>

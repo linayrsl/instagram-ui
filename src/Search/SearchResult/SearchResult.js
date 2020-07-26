@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import "./SearchUser.scss";
-import Avatar from "../../Avatar/Avatar";
+import Avatar from "../../common/Avatar/Avatar";
 
 function SearchResult(props) {
   return (
@@ -9,7 +10,8 @@ function SearchResult(props) {
         <Avatar image={props.user.avatar} size={"sm"} />
       </div>
       <div className={"searchedUserDetails mr-2 ml-2"}>
-        {props.user.username}
+        <Link to={`/profile/${props.user._id}`}>{props.user.username} </Link>
+        {/*{props.user.username}*/}
       </div>
     </div>
   );
