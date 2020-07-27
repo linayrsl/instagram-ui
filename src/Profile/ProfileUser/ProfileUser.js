@@ -5,27 +5,29 @@ import "./ProfileUser.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserEdit} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
+import {UserContext} from "../../context/userContext";
+
 
 function ProfileUser(props) {
 
   const [profile, setProfile] = useState({});
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const getUser = async() => {
       try {
-        const result = await (await fetch(`${config.apiUrl}/users/${props.userId}`, {
+        const result = await fetch(`${config.apiUrl}/users/${props.userId}`, {
           credentials: "include"
-        })).json();
-        // if (result.status === 200) {
-          setProfile(result);
-        // }
+        });
+        if (result.status === 200) {
+          setProfile(await result.json());
+        }
       } catch (error) {
         console.error(error);
       }
     }
     getUser();
   }, [props.userId]);
-
 
   return (
     <div className={"profileUser mt-sm-5 mt-3 row"}>
@@ -45,9 +47,9 @@ function ProfileUser(props) {
         </div>
         <div className="profileBio mt-1">{profile.bio}</div>
         <div className="mt-1">
-          <Link aria-label={"Edit profile"} to={"/profile/edit"} className={"editProfileIcon"}>
+          {props.userId === user._id && <Link aria-label={"Edit profile"} to={"/profile/edit"} className={"editProfileIcon"}>
             <FontAwesomeIcon aria-hidden={true} icon={faUserEdit} />
-          </Link>
+          </Link>}
         </div>
       </div>
     </div>

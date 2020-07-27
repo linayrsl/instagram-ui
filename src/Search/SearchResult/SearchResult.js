@@ -10,8 +10,10 @@ function SearchResult(props) {
         <Avatar image={props.user.avatar} size={"sm"} />
       </div>
       <div className={"searchedUserDetails mr-2 ml-2"}>
-        <Link to={`/profile/${props.user._id}`}>{props.user.username} </Link>
-        {/*{props.user.username}*/}
+        <Link className="d-flex flex-column" to={`/profile/${props.user._id}`}>
+          <span>{props.user.username}</span>
+          <span>{props.user.bio}</span>
+        </Link>
       </div>
     </div>
   );

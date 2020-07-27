@@ -43,7 +43,7 @@ console.log(isLiked);
     <>
       <button
         onClick={() => !isLiked ? getLikes() : removeLikes()}
-        className={"postLike mr-2"} type={"button"} aria-label={"Post likes icon"}>
+        className={"postLike"} type={"button"} aria-label={"Post likes icon"}>
         <FontAwesomeIcon aria-hidden={true} className={isLiked ? "isLiked" : ""}  icon={faHeart}/>
       </button>
     </>

@@ -4,7 +4,8 @@ import Post from "../common/Post/Post";
 import "./Feed.scss";
 
 
-function Feed() {
+
+function Feed(props) {
 
   const [posts, setPosts] = useState([]);
 

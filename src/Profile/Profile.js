@@ -35,7 +35,6 @@ function Profile() {
   return (
     <div className={"profile container-fluid"}>
       <ProfileUser userId={id} postsNum={posts.length}/>
-
       <div className="profileBody mt-5">
         {posts.map((post) => <Post key={post._id} post={post} />)}
       </div>
