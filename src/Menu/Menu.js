@@ -19,7 +19,7 @@ function Menu() {
         <nav className="menu navbar navbar-expand navbar navbar-light align-items-baseline">
           <h2 className="instagramLogo navbar-brand headerLink">
             <FontAwesomeIcon aria-hidden={true} className={"mr-2"} icon={faInstagram} />
-            Instagram</h2>
+            picturama</h2>
             {user &&
             <ul className="actionButtons navbar-nav d-flex align-items-center">
               <li className="nav-item">
