@@ -7,6 +7,7 @@ import editProfileImage from "./edit-profile-image.png";
 import "./ProfileEdit.scss";
 import {ProfileEditSchema} from "./ProfileEditSchema";
 import {UserContext} from "../context/userContext";
+import {Link} from "react-router-dom";
 
 
 function ProfileEdit() {

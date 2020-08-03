@@ -22,16 +22,16 @@ function PostComments(props) {
   }, [postId]);
 
   return (
-    <div className="postComment  mt-sm-0 mt-4">
-      <div className="comments col-sm-6">
-        <h5 >Comments:</h5>
+    <div className="postComment">
+      <div className="comments">
         <div>
-          {comments.map(comment => <Comment key={comment._id} content={comment.content} />)}
+          {comments.map(
+            comment => <Comment currentUser={props.currentUser} key={comment._id} content={comment.content} user={comment.user} commentDate={comment.createdAt}/>)}
         </div>
       </div>
-      <ul className="createComment col-sm-6">
-        <CommentCreate onCommentCreate={(comment) => setComments([...comments, comment])} postId={postId} />
-      </ul>
+      <div className="createComment">
+        <CommentCreate onCommentCreate={(comment) => setComments([...comments, comment])} postId={postId}/>
+      </div>
     </div>
   );
 }

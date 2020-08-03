@@ -1,4 +1,16 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
 .postImage {
+  border-radius: 5px;
+  width: 100%;
+  padding: 0;
+
+  .postImageBody {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
 
   img {
     width: 100%;
@@ -14,3 +26,13 @@
     color: black;
   }
 }
+
+@include media-breakpoint-up(md) {
+  .commentsSection {
+    max-height: calc(100vh - 62px - 3rem - 3rem);
+    overflow-y: scroll;
+    padding-left: 3rem;
+
+  }
+}
+

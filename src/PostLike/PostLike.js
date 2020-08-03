@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHeart} from "@fortawesome/free-regular-svg-icons";
+import {faHeart} from "@fortawesome/free-solid-svg-icons";
 import config from "../config/index";
 import "./PostLike.scss";
 import {UserContext} from "../context/userContext";
@@ -44,6 +44,7 @@ console.log(isLiked);
       <button
         onClick={() => !isLiked ? getLikes() : removeLikes()}
         className={"postLike"} type={"button"} aria-label={"Post likes icon"}>
+        <span className="mr-1" aria-label={"number of likes for post"}>{props.likesAmount}</span>
         <FontAwesomeIcon aria-hidden={true} className={isLiked ? "isLiked" : ""}  icon={faHeart}/>
       </button>
     </>

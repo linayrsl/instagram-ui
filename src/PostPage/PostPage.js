@@ -38,22 +38,24 @@ function PostPage() {
   return (
     <div className={"postPage container-fluid mt-5"}>
       {post && <div className={"row"}>
-        <div className={"postImage col-sm-4"}>
-          <img src={`${post.image}`}/>
-          <div className="d-flex mt-2 align-items-center justify-content-between">
-            <div className="avatarAndDescription align-items-center">
-              <Avatar size="sm" image={post.user && post.user.avatar} />
-              <div className="d-inline-block ml-2"><Date  date={post} /></div>
+          <div className={"postImage col-md-6 mb-4 mb-md-0"}>
+            <div className="postImageBody">
+              <img src={`${post.image}`}/>
+              <div className="d-flex mt-2 align-items-center justify-content-between ml-1">
+                <div className="avatarAndDescription align-items-center">
+                  <Avatar size="sm" image={post.user && post.user.avatar} />
+                  <div className="d-inline-block ml-2"><Date  date={post} /></div>
+                </div>
+                <div className="postDetails d-flex">
+                  <div aria-label={"number of likes for post"} className={"numOfLikes"}>{post.likes.length}</div>
+                  <PostLike post={post} onLikesChange={onLikesChange} isLiked={post.likes.includes(user._id)}/>
+                </div>
+              </div>
+              <div className="ml-1">{post.description}</div>
             </div>
-            <div className="postDetails d-flex">
-              <div aria-label={"number of likes for post"} className={"numOfLikes"}>{post.likes.length}</div>
-              <PostLike post={post} onLikesChange={onLikesChange} isLiked={post.likes.includes(user._id)}/>
             </div>
-          </div>
-          <div>{post.description}</div>
-        </div>
-        <div className="col-sm-6">
-          <PostComments postId={id} />
+        <div className="commentsSection col-md-6">
+          <PostComments currentUser={user} postId={id} />
         </div>
       </div>}
     </div>

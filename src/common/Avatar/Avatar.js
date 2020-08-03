@@ -5,7 +5,6 @@ import "./Avatar.scss";
 
 
 function Avatar(props) {
-  console.log(props);
   const size = props.size || "sm";
   const image = props.image || null;
   return (

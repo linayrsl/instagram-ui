@@ -28,14 +28,14 @@ function CommentCreate(props) {
   };
 
   return (
-    <div className={"createComment mt-5"}>
+    <div className={"createComment mt-4"}>
       <Formik
         initialValues={{content: ""}}
         validationSchema={commentCreateSchema}
         onSubmit={submit}
       >
         {({values, isSubmitting, setFieldValue}) => (
-          <Form className={"createComment col-12 mt-2 form"}>
+          <Form className={"createComment col-11 mt-2 form"}>
             <h5>Create Comment:</h5>
             <div className={"form-group createComment"}>
               <Field className="form-control" as="textarea" name="content" placeholder="" id="content" />

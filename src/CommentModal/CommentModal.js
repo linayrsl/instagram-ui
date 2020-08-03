@@ -3,10 +3,12 @@ import {Modal, ModalBody, ModalHeader} from "reactstrap";
 import PostComments from "../PostPage/PostComments/PostComments";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComment} from "@fortawesome/free-regular-svg-icons";
+import "./CommentModel.scss";
 
 function CommentModal(props) {
 
   const {
+    commentsAmount,
     className
   } = props;
 
@@ -17,6 +19,7 @@ function CommentModal(props) {
   return (
     <>
       <button onClick={toggle} type={"button"} aria-label={"Post comment icon mr-2"}>
+        <span className="mr-1">{commentsAmount}</span>
         <FontAwesomeIcon aria-hidden={true} className={"commentIcon"} icon={faComment} />
       </button>
       <Modal isOpen={modal} className={className} external={""}>
