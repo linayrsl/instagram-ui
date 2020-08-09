@@ -18,12 +18,15 @@ function Feed(props) {
           credentials: "include",
         });
       if (result.status === 200) {
-        const posts = await result.json();
-        setPosts(posts);
+        setPosts([
+          ...posts,
+          ...await result.json()
+        ]);
         console.log(posts);
       }
     }
     getPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber, props.userId]);
 
   return (
