@@ -14,6 +14,7 @@ function ProfileUser(props) {
   const [profile, setProfile] = useState({});
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
+  const [userStats, setUserStats] = useState({});
   const [follow, setFollow] = useState(false);
   const { user } = useContext(UserContext);
 
@@ -37,45 +38,24 @@ function ProfileUser(props) {
     if (!profile._id) {
       return;
     }
-    const getFollowers = async () => {
+    const getUserStats = async () => {
       try {
-        const result = await fetch(`${config.apiUrl}/users/${profile._id}/follow/followers`, {
+        const result = await fetch(`${config.apiUrl}/users/${profile._id}/stats`, {
           credentials: "include",
         })
         if (result.status === 200) {
-          setFollowers(await result.json());
+          const stats = await result.json();
+          setUserStats(stats);
+          setFollow(stats.isFollowedByCurrentUser);
         }
       } catch (error) {
         console.log(error);
       }
     }
-    getFollowers();
-  }, [profile._id])
+    getUserStats();
+  }, [profile._id, follow])
 
-  useEffect(() => {
-    if (!profile._id) {
-      return;
-    }
-    const getFollowing = async () => {
-      try {
-        const result = await fetch(`${config.apiUrl}/users/${profile._id}/follow/following`, {
-          credentials: "include",
-        });
-        if (result.status === 200) {
-          setFollowing(await result.json());
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getFollowing();
-  }, [profile._id])
 
-  useEffect(() => {
-    if (followers.find((follow) => follow.userId === user._id)) {
-      setFollow(true);
-    }
-  }, [followers, user._id])
 
   const followUser = async () => {
     const result = await fetch(`${config.apiUrl}/users/${profile._id}/follow`, {
@@ -86,6 +66,17 @@ function ProfileUser(props) {
       console.log(result);
       setFollow(true);
       console.log(follow);
+    }
+  }
+
+  const unfollowUser = async () => {
+    const result = await fetch(`${config.apiUrl}/users/${profile._id}/unfollow`, {
+      method: "POST",
+      credentials: "include"
+    });
+    if (result.status === 200) {
+      console.log(result);
+      setFollow(false);
     }
   }
 
@@ -100,10 +91,10 @@ function ProfileUser(props) {
         </h4>
         <div className="profileUserDetails d-flex align-items-center">
           <div>
-            posts: {props.postsNum}
+            Posts: {userStats.postsCount}
           </div>
-          <div className="ml-3">Following: {following.length}</div>
-          <div className="ml-3">Followed: {followers.length}</div>
+          <div className="ml-3">Following: {userStats.followsCount}</div>
+          <div className="ml-3">Followed: {userStats.followersCount}</div>
         </div>
         <div className="profileBio mt-1">{profile.bio}</div>
         <div className="mt-1">
@@ -112,7 +103,7 @@ function ProfileUser(props) {
           </Link>}
         </div>
         {profile._id !== user._id && (follow
-          ? <button type="button" className="followButton btn btn-dark btn-sm">
+          ? <button onClick={unfollowUser} type="button" className="followButton btn btn-dark btn-sm">
               Unfollow
             </button>
           : <button onClick={followUser} type="button" className="followButton btn btn-dark btn-sm">
