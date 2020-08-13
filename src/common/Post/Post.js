@@ -53,7 +53,8 @@ function Post(props) {
               <Link to={`/profile/${post.user._id}`}>
                 <Avatar image={post.user && post.user.avatar} size={"sm"} className={"userAvatar"} defaultColor={"black"} />
               </Link>
-              <span className={"postDate"}> <Date date={post}/></span>
+              <span className="ml-1">{post.user.username}</span>
+              <div className={"postDate text-muted mt-1"}> <Date date={post}/></div>
             </div>
             <div className={"postControls"}>
               <PostLike likesAmount={post.likes.length} onLikesChange={onLikesChange} post={props.post} isLiked={post.likes.includes(user._id)} />
@@ -61,7 +62,7 @@ function Post(props) {
             </div>
           </div>
           {post.description ?
-            <div className={"postDescription mt-2"}>{post.description}</div> :
+            <div className={"postDescription mt-1"}>{post.description}</div> :
             <FontAwesomeIcon aria-hidden={true} icon={faEllipsisH} />}
         </div>
       </div>

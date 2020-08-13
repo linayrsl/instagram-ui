@@ -43,15 +43,18 @@ function PostPage() {
               <img src={`${post.image}`}/>
               <div className="d-flex mt-2 align-items-center justify-content-between ml-1">
                 <div className="avatarAndDescription align-items-center">
-                  <Avatar size="sm" image={post.user && post.user.avatar} />
-                  <div className="d-inline-block ml-2"><Date  date={post} /></div>
+                  <div className="d-flex align-items-center">
+                    <Avatar size="sm" image={post.user && post.user.avatar} />
+                    <span className="ml-1">{post.user.username}</span>
+                  </div>
+                  <div className="d-inline-block text-muted mt-1"><Date  date={post} /></div>
                 </div>
                 <div className="postDetails d-flex">
                   <div aria-label={"number of likes for post"} className={"numOfLikes"}>{post.likes.length}</div>
                   <PostLike post={post} onLikesChange={onLikesChange} isLiked={post.likes.includes(user._id)}/>
                 </div>
               </div>
-              <div className="ml-1">{post.description}</div>
+              <div className="ml-1 mt-1">{post.description}</div>
             </div>
             </div>
         <div className="commentsSection col-md-6">

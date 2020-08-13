@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Register.scss";
 import { Formik, Form, Field } from "formik";
-import { useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import { RegisterSchema } from "./RegisterSchema";
 import registerImage from "./register-image.png";
 import config from "../config/index";
@@ -89,6 +89,7 @@ function Register() {
             </Form>
           )}
         </Formik>
+        <div className="ml-3">Already have account? <br /> great! please <Link to="/login">login</Link></div>
       </div>
     </div>
   );

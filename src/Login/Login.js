@@ -32,9 +32,11 @@ function Login(props) {
   };
   return (
     <div className="login row d-flex justify-content-center align-items-start mt-5">
-      <div className="loginImage col-12 col-md-6 d-flex justify-content-md-end justify-content-end">
-        <img aria-hidden alt="Cute picture" src={loginImage} />
+      {/*<div className="loginImage col-12 col-md-6 d-flex justify-content-md-end justify-content-center align-items-center flex-column mt-sm-4">*/}
+      <div className="loginImage col-12 col-md-6 d-flex justify-content-md-end align-items-center flex-column mt-sm-4">
+        <img className="" aria-hidden alt="" src={loginImage} />
       </div>
+      {/*<div className="col-12 col-md-6 justify-content-md-end justify-content-end">*/}
       <div className="col-12 col-md-6 justify-content-md-end justify-content-center">
         <Formik
           initialValues={{ username: "", password: "" }}
