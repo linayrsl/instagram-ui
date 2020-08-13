@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import config from "../config/index";
 import SearchResult from "./SearchResult/SearchResult";
 import noResultImage from "./no-result-image.jpg";
 
 import "./Search.scss";
+import {UserContext} from "../context/userContext";
 
 let searchTimeout = null;
 
 function Search() {
 
+  const { user } = useContext(UserContext);
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
   const [requestProcess, setRequestProcess] = useState(false);
@@ -18,6 +20,8 @@ function Search() {
       try {
         const result = await fetch(`${config.apiUrl}/users?username=${query}`, {
           credentials: "include",
+          headers: {
+            "Authorization": "Bearer " + user.token}
         });
         if (result.status === 200) {
           const users = await result.json();
@@ -44,7 +48,7 @@ function Search() {
           })
         }, 500);
     }
-  }, [query]);
+  }, [query, user.token]);
 
   return (
     <div className={"search container-fluid mt-4"}>

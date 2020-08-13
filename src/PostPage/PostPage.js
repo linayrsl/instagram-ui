@@ -21,7 +21,9 @@ function PostPage() {
     const getPosts = async() => {
       try {
         const result = await fetch(`${config.apiUrl}/posts/${id}`, {
-          credentials: "include"
+          credentials: "include",
+          headers: {
+            "Authorization": "Bearer " + user.token}
         });
         setPost(await result.json());
         } catch (error) {
@@ -29,7 +31,7 @@ function PostPage() {
         }
       }
     getPosts();
-  }, [id]);
+  }, [id, user.token]);
 
   const onLikesChange = (post) => {
     setPost(post);

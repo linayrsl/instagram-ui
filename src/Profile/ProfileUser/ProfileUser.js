@@ -12,8 +12,6 @@ import {UserContext} from "../../context/userContext";
 function ProfileUser(props) {
 
   const [profile, setProfile] = useState({});
-  const [followers, setFollowers] = useState([]);
-  const [following, setFollowing] = useState([]);
   const [userStats, setUserStats] = useState({});
   const [follow, setFollow] = useState(false);
   const { user } = useContext(UserContext);
@@ -21,8 +19,10 @@ function ProfileUser(props) {
   useEffect(() => {
     const getUser = async() => {
       try {
-        const result = await fetch(`${config.apiUrl}/users/${props.userId}`, {
-          credentials: "include"
+        const result = await fetch(`${config.apiUrl}/users/${props.userId}/`, {
+          credentials: "include",
+          headers: {
+            "Authorization": "Bearer " + user.token}
         });
         if (result.status === 200) {
           setProfile(await result.json());
@@ -32,7 +32,7 @@ function ProfileUser(props) {
       }
     }
     getUser();
-  }, [props.userId]);
+  }, [props.userId, user.token]);
 
   useEffect(() => {
     if (!profile._id) {
@@ -40,8 +40,10 @@ function ProfileUser(props) {
     }
     const getUserStats = async () => {
       try {
-        const result = await fetch(`${config.apiUrl}/users/${profile._id}/stats`, {
+        const result = await fetch(`${config.apiUrl}/users/${profile._id}/stats/`, {
           credentials: "include",
+          headers: {
+            "Authorization": "Bearer " + user.token}
         })
         if (result.status === 200) {
           const stats = await result.json();
@@ -53,7 +55,7 @@ function ProfileUser(props) {
       }
     }
     getUserStats();
-  }, [profile._id, follow])
+  }, [profile._id, follow, user.token])
 
 
 
@@ -97,18 +99,21 @@ function ProfileUser(props) {
           <div className="ml-3">Followed: {userStats.followersCount}</div>
         </div>
         <div className="profileBio mt-1">{profile.bio}</div>
-        <div className="mt-1">
-          {props.userId === user._id && <Link aria-label={"Edit profile"} to={"/profile/edit"} className={"editProfileIcon"}>
-            <FontAwesomeIcon aria-hidden={true} icon={faUserEdit} />
-          </Link>}
-        </div>
-        {profile._id !== user._id && (follow
-          ? <button onClick={unfollowUser} type="button" className="followButton btn btn-dark btn-sm">
-              Unfollow
-            </button>
-          : <button onClick={followUser} type="button" className="followButton btn btn-dark btn-sm">
-              Follow
-            </button>)}
+        {profile._id &&
+          <>
+            <div className="mt-1">
+              {props.userId === user._id && <Link aria-label={"Edit profile"} to={"/profile/edit"} className={"editProfileIcon"}>
+                <FontAwesomeIcon aria-hidden={true} icon={faUserEdit} />
+              </Link>}
+            </div>
+            {profile._id !== user._id && (follow
+              ? <button onClick={unfollowUser} type="button" className="followButton btn btn-dark btn-sm">
+                  Unfollow
+                </button>
+              : <button onClick={followUser} type="button" className="followButton btn btn-dark btn-sm">
+                  Follow
+                </button>)}
+            </>}
       </div>
     </div>
   );

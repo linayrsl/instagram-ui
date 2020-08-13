@@ -28,6 +28,8 @@ function Post(props) {
       try {
         const result = await fetch(`${config.apiUrl}/posts/${post._id}/comment`, {
           credentials: "include",
+          headers: {
+            "Authorization": "Bearer " + user.token}
         });
         if (result.status === 200) {
           setComments(await result.json());
@@ -37,7 +39,7 @@ function Post(props) {
       }
     }
     getComments();
-  }, [post._id])
+  }, [post._id, user.token])
 
   return (
     <div className="post" tabIndex={0}>

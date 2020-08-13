@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import { Field, Form, Formik } from "formik";
 import { PostCreateSchema } from "./PostCreateSchema";
 import config from "../config/index";
@@ -8,9 +8,11 @@ import createPostImage from "./create-post-image.jpeg";
 
 import "./PostCreate.scss";
 import {ImageInput} from "../ImageInput/ImageInput";
+import {UserContext} from "../context/userContext";
 
 function PostCreate() {
   const history = useHistory();
+  const { user } = useContext(UserContext);
   const [isProcessing, setIsProcessing] = useState(false);
   const [postImage, setPostImage] = useState(null);
 
@@ -21,6 +23,7 @@ function PostCreate() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + user.token,
         },
         credentials: "include",
         body: JSON.stringify({...values, image: postImage}),
@@ -34,7 +37,7 @@ function PostCreate() {
 
   return (
     <div className="createPost row d-flex justify-content-center align-items-start mt-sm-4 mt-0">
-      <div className="createPostImage col-12 col-md-6 d-flex justify-content-md-end justify-content-center">
+      <div className="createPostImage col-12 col-md-6 d-flex justify-content-md-end justify-content-center flex-column">
         <img aria-hidden alt="Cute picture" src={postImage || createPostImage} />
       </div>
       <div className="col-12 col-md-6 justify-content-md-end justify-content-center">

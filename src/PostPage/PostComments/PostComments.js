@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import config from "../../config/index";
 import Comment from "./Comment/Comment";
 import "./PostComments.scss";
 import CommentCreate from "./CommentCreate/CommentCreate";
+import {UserContext} from "../../context/userContext";
 
 function PostComments(props) {
   const postId = props.postId;
+  const { user } = useContext(UserContext);
   const [comments, setComments] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -14,6 +16,8 @@ function PostComments(props) {
     const getComments = async (id, page) => {
       const result = await fetch(`${config.apiUrl}/posts/${id}/comment?page=${page}`, {
         credentials: "include",
+        headers: {
+          "Authorization": "Bearer " + user.token}
       });
       if (result.status === 200) {
         console.log(result);

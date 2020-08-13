@@ -32,6 +32,8 @@ function PostLike(props) {
     const response = await fetch(`${config.apiUrl}/posts/${props.post._id}/likes`, {
       method: "DELETE",
       credentials: "include",
+      headers: {
+        "Authorization": "Bearer " + user.token}
     });
     if (response.status === 200) {
       props.onLikesChange(await response.json());

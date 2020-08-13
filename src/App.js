@@ -11,7 +11,6 @@ import Login from "./Login/Login";
 import PostCreate from "./PostCreate/PostCreate";
 import { UserContext } from "./context/userContext";
 import Logout from "./Logout/Logout";
-import { UserService } from "./services/user-service";
 import AppLoader from "./AppLoader/AppLoader";
 import Feed from "./Feed/Feed";
 import Profile from "./Profile/Profile";
@@ -20,7 +19,16 @@ import ProfileEdit from "./ProfileEdit/ProfileEdit";
 import PostPage from "./PostPage/PostPage";
 
 function App() {
-  const [user, setUser] = useState({});
+
+  const saveUserToLocalstorage = (user) => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
+  const getUserFromLocalstorage = () => {
+    return JSON.parse(localStorage.getItem("user") || "{}");
+  }
+
+  const [user, setUser] = useState(getUserFromLocalstorage());
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
 
@@ -28,23 +36,11 @@ function App() {
     window.document.body.classList.add("init-app-loader-animate-hide");
     // Hiding initial app loader after 1 sec because the "fading" animation takes 1 sec to work
     setTimeout(() => window.document.body.classList.add("init-app-loader-hidden"), 1000);
-
-    async function getUser() {
-      try {
-        const foundUser = await UserService.get();
-        setUser(foundUser);
-        if (!foundUser) {
-          history.push("/login");
-        }
-      } catch (error) {
-        console.error(error);
-        history.push("/login");
-      } finally {
-        setIsLoading(false);
-      }
+    if (!user._id) {
+      history.push("/login");
     }
-    getUser();
-  }, [history]);
+    setIsLoading(false);
+  }, [history, user]);
 
   return (
     <UserContext.Provider value={{ user, setUser: (user) => setUser(user) }}>
@@ -57,10 +53,10 @@ function App() {
               <Register />
             </Route>
             <Route path="/login">
-              <Login onUserLogIn={(currentUser) => { setUser(currentUser); }} />
+              <Login onUserLogIn={(currentUser) => { setUser(currentUser); saveUserToLocalstorage(currentUser); }} />
             </Route>
             <Route path="/logout">
-              <Logout onUserLogOut={() => { setUser(null); }} />
+              <Logout onUserLogOut={() => { localStorage.clear(); }} />
             </Route>
             <Route path="/post/create">
               <PostCreate />

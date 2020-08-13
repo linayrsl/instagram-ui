@@ -1,12 +1,10 @@
 import React, {useContext, useState} from 'react';
-import {UserContext} from "../context/userContext";
-import "./Profile.scss";
 import {useParams} from "react-router-dom";
 import ProfileUser from "./ProfileUser/ProfileUser";
 import Feed from "../Feed/Feed";
+import "./Profile.scss";
 
 function Profile() {
-  const { user } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
   const { id } = useParams();
 

@@ -28,6 +28,7 @@ function ProfileEdit() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + user.token,
         },
         credentials: "include",
         body: JSON.stringify({...values, image: postImage}),

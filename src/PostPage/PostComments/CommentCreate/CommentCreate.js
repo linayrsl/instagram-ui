@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Field, Form, Formik} from "formik";
 import LoadingIndicator from "../../../LoadingIndicator/LoadingIndicator";
 import {commentCreateSchema} from "./commentCreateSchema";
 import config from "../../../config";
 import "./CommentCreate.scss";
+import {UserContext} from "../../../context/userContext";
 
 function CommentCreate(props) {
+
+  const { user } = useContext(UserContext);
 
   const submit = async (values) => {
 
@@ -14,6 +17,7 @@ function CommentCreate(props) {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + user.token,
         },
         credentials: "include",
         body: JSON.stringify(values),
