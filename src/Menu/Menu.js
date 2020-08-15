@@ -15,7 +15,7 @@ import MenuAvatar from "./MenuAvatar/MenuAvatar";
 
 function Menu() {
   const { user } = useContext(UserContext);
-  console.log(user);
+
   return (
         <nav className="menu navbar navbar-expand navbar navbar-light align-items-baseline">
           <h2 className="instagramLogo navbar-brand headerLink">
@@ -70,7 +70,6 @@ function Menu() {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>}
-          {/*</div>*/}
         </nav>
   );
 }

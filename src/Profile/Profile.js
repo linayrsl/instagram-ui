@@ -1,11 +1,11 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {useParams} from "react-router-dom";
 import ProfileUser from "./ProfileUser/ProfileUser";
 import Feed from "../Feed/Feed";
 import "./Profile.scss";
 
 function Profile() {
-  const [posts, setPosts] = useState([]);
+  const [posts] = useState([]);
   const { id } = useParams();
 
   return (

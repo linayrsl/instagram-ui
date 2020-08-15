@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import "./Post.scss";
 import Date from "../Date/Date";
 import {
@@ -7,39 +7,21 @@ import {
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Avatar from "../../common/Avatar/Avatar";
 import PostLike from "../../PostLike/PostLike";
-import {UserContext} from "../../context/userContext";
 import {Link} from "react-router-dom";
 import CommentModal from "../../CommentModal/CommentModal";
-import config from "../../config/index";
 
 
 function Post(props) {
 
-  const { user } = useContext(UserContext);
   const [post, setPost] = useState(props.post);
-  const [comments, setComments] = useState([]);
 
-  const onLikesChange = (post) => {
-    setPost(post);
+  const onLikesChange = (isLiked) => {
+    setPost({
+      ...post,
+      likesCount: isLiked ? post.likesCount + 1 : post.likesCount - 1,
+      isLikedByCurrentUser: isLiked,
+    });
   }
-
-  useEffect(() => {
-    const getComments = async () => {
-      try {
-        const result = await fetch(`${config.apiUrl}/posts/${post._id}/comment`, {
-          credentials: "include",
-          headers: {
-            "Authorization": "Bearer " + user.token}
-        });
-        if (result.status === 200) {
-          setComments(await result.json());
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getComments();
-  }, [post._id, user.token])
 
   return (
     <div className="post" tabIndex={0}>
@@ -59,8 +41,8 @@ function Post(props) {
               <div className={"postDate text-muted mt-1"}> <Date date={post}/></div>
             </div>
             <div className={"postControls"}>
-              <PostLike likesAmount={post.likes.length} onLikesChange={onLikesChange} post={props.post} isLiked={post.likes.includes(user._id)} />
-              <CommentModal commentsAmount={comments.length} postId={post._id} />
+              <PostLike likesAmount={post.likesCount} onLikesChange={onLikesChange} post={props.post} isLiked={post.isLikedByCurrentUser} />
+              <CommentModal commentsAmount={post.commentsCount} postId={post._id} />
             </div>
           </div>
           {post.description ?

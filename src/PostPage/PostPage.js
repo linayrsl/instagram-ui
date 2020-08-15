@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import config from "../config/index";
 import "./PostPage.scss";
 import Date from "../common/Date/Date";
@@ -7,9 +7,6 @@ import PostLike from "../PostLike/PostLike";
 import {UserContext} from "../context/userContext";
 import PostComments from "./PostComments/PostComments";
 import Avatar from "../common/Avatar/Avatar";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faComment} from "@fortawesome/free-regular-svg-icons";
-import CommentCreate from "./PostComments/CommentCreate/CommentCreate";
 
 function PostPage() {
 
@@ -33,8 +30,12 @@ function PostPage() {
     getPosts();
   }, [id, user.token]);
 
-  const onLikesChange = (post) => {
-    setPost(post);
+  const onLikesChange = (isLiked) => {
+    setPost({
+      ...post,
+      likesCount: isLiked ? post.likesCount + 1 : post.likesCount - 1,
+      isLikedByCurrentUser: isLiked,
+    });
   }
 
   return (
@@ -52,8 +53,8 @@ function PostPage() {
                   <div className="d-inline-block text-muted mt-1"><Date  date={post} /></div>
                 </div>
                 <div className="postDetails d-flex">
-                  <div aria-label={"number of likes for post"} className={"numOfLikes"}>{post.likes.length}</div>
-                  <PostLike post={post} onLikesChange={onLikesChange} isLiked={post.likes.includes(user._id)}/>
+                  <div aria-label={"number of likes for post"} className={"numOfLikes"}>{post.likesCount}</div>
+                  <PostLike post={post} onLikesChange={onLikesChange} isLiked={post.isLikedByCurrentUser}/>
                 </div>
               </div>
               <div className="ml-1 mt-1">{post.description}</div>

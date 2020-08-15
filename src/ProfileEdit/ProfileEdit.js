@@ -7,7 +7,6 @@ import editProfileImage from "./edit-profile-image.png";
 import "./ProfileEdit.scss";
 import {ProfileEditSchema} from "./ProfileEditSchema";
 import {UserContext} from "../context/userContext";
-import {Link} from "react-router-dom";
 
 
 function ProfileEdit() {
@@ -15,7 +14,7 @@ function ProfileEdit() {
   const { user, setUser } = useContext(UserContext);
   const [postImage, setPostImage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [formData, setFormData] = useState({biography: null});
+  const [formData] = useState({biography: null});
 
   useEffect(() => {
 

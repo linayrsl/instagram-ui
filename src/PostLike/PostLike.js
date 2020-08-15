@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart} from "@fortawesome/free-solid-svg-icons";
 import config from "../config/index";
@@ -16,6 +16,7 @@ function PostLike(props) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": "Bearer " + user.token,
       },
       credentials: "include",
     });
@@ -23,8 +24,7 @@ function PostLike(props) {
       // TODO: show error message
     }
     if (response.status === 200) {
-      props.onLikesChange(await response.json());
-      // setPost(await response.json());
+      props.onLikesChange(true);
     }
   }
 
@@ -36,8 +36,7 @@ function PostLike(props) {
         "Authorization": "Bearer " + user.token}
     });
     if (response.status === 200) {
-      props.onLikesChange(await response.json());
-      // setPost(await response.json());
+      props.onLikesChange(false);
     }
   };
 console.log(isLiked);
@@ -53,5 +52,4 @@ console.log(isLiked);
 
   );
 }
-// () => post.likes.includes(user._id) ?
 export default PostLike;
