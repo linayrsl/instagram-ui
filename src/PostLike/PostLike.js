@@ -39,7 +39,7 @@ function PostLike(props) {
       props.onLikesChange(false);
     }
   };
-console.log(isLiked);
+
   return (
     <>
       <button

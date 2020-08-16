@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./Post.scss";
 import Date from "../Date/Date";
 import {
@@ -9,11 +9,64 @@ import Avatar from "../../common/Avatar/Avatar";
 import PostLike from "../../PostLike/PostLike";
 import {Link} from "react-router-dom";
 import CommentModal from "../../CommentModal/CommentModal";
+import {PusherEventsContext} from "../../context/pusherEventsContext";
+import {UserContext} from "../../context/userContext";
+
 
 
 function Post(props) {
 
+  const { user } = useContext(UserContext);
   const [post, setPost] = useState(props.post);
+  const channel = useContext(PusherEventsContext);
+
+
+  useEffect(() => {
+    const postLikeEventHandler = (data) => {
+      if (data.userId === user._id) {
+        return;
+      }
+      if (post._id !== data.postId) {
+        return;
+      }
+      const updatedPost = {...post};
+      updatedPost.likesCount++;
+      setPost(updatedPost);
+    }
+
+    const postUnLikeEventHandler = (data) => {
+      if (data.userId === user._id) {
+        return;
+      }
+      if (post._id !== data.postId) {
+        return;
+      }
+      const updatedPost = {...post};
+      if (post.likesCount >= 1) {
+        updatedPost.likesCount--;
+      }
+      setPost(updatedPost);
+    }
+
+    channel.bind("postLike", postLikeEventHandler);
+    channel.bind("postUnLike", postUnLikeEventHandler);
+    return () => {
+      channel.unbind("postLike", postLikeEventHandler);
+      channel.unbind("postUnLike", postUnLikeEventHandler);
+    }
+  }, [channel, post, user._id]);
+
+  useEffect(() => {
+    const addCommentEventHandler = (data) => {
+      const updatedPost = {...post};
+      updatedPost.commentsCount++;
+      setPost(updatedPost);
+    }
+    channel.bind("addComment", addCommentEventHandler);
+    return () => {
+      channel.unbind("addComment", addCommentEventHandler);
+    }
+  }, [channel, post]);
 
   const onLikesChange = (isLiked) => {
     setPost({

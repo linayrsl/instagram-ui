@@ -1,16 +1,16 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Field, Form, Formik} from "formik";
-import LoadingIndicator from "../../../LoadingIndicator/LoadingIndicator";
 import {commentCreateSchema} from "./commentCreateSchema";
 import config from "../../../config";
 import "./CommentCreate.scss";
 import {UserContext} from "../../../context/userContext";
 
+
 function CommentCreate(props) {
 
   const { user } = useContext(UserContext);
 
-  const submit = async (values) => {
+  const submit = async (values, {resetForm}) => {
 
     try {
       const result = await fetch(`${config.apiUrl}/posts/${props.postId}/comment`, {
@@ -25,6 +25,7 @@ function CommentCreate(props) {
       if (result.status === 201) {
         console.log(result);
         props.onCommentCreate(await result.json());
+        resetForm({values: ""});
       }
     } catch (error) {
       console.error(error)
